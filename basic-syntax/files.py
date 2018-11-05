@@ -13,3 +13,9 @@ with open('path/to/file.txt', 'r') as file:
 # write to file
 with open('path/to/file.txt', 'w') as file:
     file.write('This is some text to write.')
+
+'''
+Michael Sjoeberg
+2018-11-05
+https://github.com/michaelsjoeberg/python-playground/blob/master/basic-syntax/files.py
+'''

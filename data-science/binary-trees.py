@@ -12,3 +12,9 @@ b_tree                  # sorteddict({'birthday': [1750, 1, 1], 'email': 'michae
 
 # list keys
 list(b_tree.keys())     # ['birthday', 'email', 'first', 'last']
+
+'''
+Michael Sjoeberg
+2018-11-05
+https://github.com/michaelsjoeberg/python-playground/blob/master/data-science/binary-trees.py
+'''

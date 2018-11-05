@@ -42,3 +42,9 @@ b[:, np.where(b < 3)[1]]
 #  [ 4  5  6]
 #  [ 8  9 10]
 #  [12 13 14]]
+
+'''
+Michael Sjoeberg
+2018-11-05
+https://github.com/michaelsjoeberg/python-playground/blob/master/data-science/numpy-masking.py
+'''

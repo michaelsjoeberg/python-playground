@@ -22,3 +22,9 @@ idx                     # [1]
 
 # nearest point
 kd_tree.data[idx]       # [[3 2]]
+
+'''
+Michael Sjoeberg
+2018-11-05
+https://github.com/michaelsjoeberg/python-playground/blob/master/data-science/k-dimensional-trees.py
+'''

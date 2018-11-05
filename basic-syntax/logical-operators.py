@@ -12,3 +12,9 @@ not (not T)                     # True
 # equality
 1 == 2                          # False
 1 != 2                          # True
+
+'''
+Michael Sjoeberg
+2018-11-05
+https://github.com/michaelsjoeberg/python-playground/blob/master/basic-syntax/logical-operators.py
+'''

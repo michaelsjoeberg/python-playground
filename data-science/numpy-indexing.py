@@ -39,3 +39,9 @@ b[i[:3], i[:3] + 1]                 # [ 1  6 11]
 
 # get diagonal of lower part
 b[i[1:], i[1:] - 1]                 # [ 4  9 14]
+
+'''
+Michael Sjoeberg
+2018-11-05
+https://github.com/michaelsjoeberg/python-playground/blob/master/data-science/numpy-indexing.py
+'''

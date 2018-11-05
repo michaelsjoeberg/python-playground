@@ -25,3 +25,9 @@ virtual_money.amount = 20
 virtual_money.currency = 'DIS'
 
 print(virtual_money)                # 20 DIS (use before 2018-12-31)
+
+'''
+Michael Sjoeberg
+2018-11-05
+https://github.com/michaelsjoeberg/python-playground/blob/master/basic-syntax/classes.py
+'''

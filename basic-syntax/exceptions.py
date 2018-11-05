@@ -11,3 +11,9 @@ except Exception as e:
 
 finally:
     # do something
+
+'''
+Michael Sjoeberg
+2018-11-05
+https://github.com/michaelsjoeberg/python-playground/blob/master/basic-syntax/exceptions.py
+'''

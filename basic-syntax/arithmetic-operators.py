@@ -34,3 +34,9 @@ max(1, 2, 3, 4)         # 4
 round(2.945)            # 3.0
 round(2.495)            # 2.0
 round(2.945, 2)         # 2.94
+
+'''
+Michael Sjoeberg
+2018-11-05
+https://github.com/michaelsjoeberg/python-playground/blob/master/basic-syntax/arithmetic-operators.py
+'''

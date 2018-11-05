@@ -7,3 +7,9 @@ while (a < b):
     a += 1
 
 print (a)                           # 5
+
+'''
+Michael Sjoeberg
+2018-11-05
+https://github.com/michaelsjoeberg/python-playground/blob/master/basic-syntax/while-loop.py
+'''

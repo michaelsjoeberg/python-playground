@@ -74,3 +74,9 @@ np.minimum(a, b)                # [55 28 49 81]
 
 # sum of axis (columns)
 np.sum(array_many, axis=1)      # [218 3413]
+
+'''
+Michael Sjoeberg
+2018-11-05
+https://github.com/michaelsjoeberg/python-playground/blob/master/data-science/numpy-arrays.py
+'''
