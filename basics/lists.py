@@ -20,5 +20,5 @@ list_string = list('100B')          # ['1', '0', '0', 'B']
 '''
 Michael Sjoeberg
 2018-11-05
-https://github.com/michaelsjoeberg/python-playground/blob/master/basic-syntax/lists.py
+https://github.com/michaelsjoeberg/python-playground/blob/master/basics/lists.py
 '''

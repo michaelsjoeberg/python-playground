@@ -16,5 +16,5 @@ not (not T)                     # True
 '''
 Michael Sjoeberg
 2018-11-05
-https://github.com/michaelsjoeberg/python-playground/blob/master/basic-syntax/logical-operators.py
+https://github.com/michaelsjoeberg/python-playground/blob/master/basics/logical-operators.py
 '''

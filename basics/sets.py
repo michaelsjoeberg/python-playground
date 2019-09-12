@@ -32,5 +32,5 @@ set_c > set_a           # True                      (Strict superset)
 '''
 Michael Sjoeberg
 2018-11-05
-https://github.com/michaelsjoeberg/python-playground/blob/master/basic-syntax/sets.py
+https://github.com/michaelsjoeberg/python-playground/blob/master/basics/sets.py
 '''

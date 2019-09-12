@@ -13,5 +13,5 @@ string[0:-1:2]          # poo
 '''
 Michael Sjoeberg
 2018-11-05
-https://github.com/michaelsjoeberg/python-playground/blob/master/basic-syntax/string-indexing.py
+https://github.com/michaelsjoeberg/python-playground/blob/master/basics/string-indexing.py
 '''
