@@ -1,7 +1,5 @@
 #!/usr/bin/python
 
-# graphs.py
-
 # Graph
 class Graph(dict):
     def __init__(self, vertices=[], edges=[]):
@@ -147,5 +145,5 @@ graph = Graph([A, B, C], [])
 '''
 Michael Sjoeberg
 2019-09-08
-https://github.com/michaelsjoeberg/python-playground/blob/master/applications/functions.py
+https://github.com/michaelsjoeberg/python-playground/blob/master/applications/graphs.py
 '''
