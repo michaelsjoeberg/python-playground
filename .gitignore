@@ -3,3 +3,4 @@ jupyter-notebooks/analysis/.ipynb_checkpoints/*.ipynb
 jupyter-notebooks/keras/.ipynb_checkpoints/*.ipynb
 .DS_Store
 *.pyc
+_mdp_pacman/*/*.py
