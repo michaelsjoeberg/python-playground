@@ -1,7 +1,4 @@
-#!/usr/bin/python
-
 # Fermat's Last Theorem: https://en.wikipedia.org/wiki/Fermat%27s_Last_Theorem
-
 # There are no positive integers a, b, and c such that a^n + b^n = c^n, for values of n grater than 2.
 
 def check_fermat(a, b, c, n):
