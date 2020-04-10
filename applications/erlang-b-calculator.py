@@ -10,6 +10,7 @@ def erlang(A, m):
     return (L / sum_)
 
 print(erlang(90, 107))
+# 0.008799105244742682
 
 '''
 Michael Sjoeberg
