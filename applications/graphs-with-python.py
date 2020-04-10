@@ -2,10 +2,8 @@
 class Graph(dict):
     def __init__(self, vertices=[], edges=[]):
         '''
-            Create a new graph.
-
-            vertices                : list of vertices
-            edges                   : list of edges
+            vertices    : list of vertices
+            edges       : list of edges
         '''
 
         for vertex in vertices: self.add_vertex(vertex)
@@ -17,7 +15,10 @@ class Graph(dict):
         self[vertex] = {}
 
     def add_edge(self, edge):
-        '''Add edge in both directions between vertex_1 and vertex_2, replaces existing edge if any.'''
+        '''
+            Add edge in both directions between vertex_1 and vertex_2, 
+            replaces existing edge if any.
+        '''
 
         vertex_1, vertex_2 = edge
 
@@ -25,7 +26,7 @@ class Graph(dict):
         self[vertex_2][vertex_1] = edge
 
     def get_edge(self, vertex_1, vertex_2):
-        '''Return edge between vertex_1 and vertex_2, otehrwise None.'''
+        '''Return edge between vertex_1 and vertex_2, otherwise None.'''
 
         try:
             return self[vertex_1][vertex_2]
@@ -117,31 +118,28 @@ A_C = Edge(A, C)
 C_D = Edge(C, D)
 
 # graph
-#graph = Graph([A, B, C, D], [A_B, A_C, C_D])
 graph = Graph([A, B, C], [])
+graph.add_all_edges()
 
-#print(graph)
+print(graph)
 
-#print(graph.get_edge(B, A))
-
-#graph.remove_edge(A_B)
-
-#print(graph.get_edge(B, A))
-
-#print(graph.vertices())
-
-#print(graph.edges())
-
-#print(graph.out_vertices(A))
-
-#print(graph.out_edges(A))
-
-#graph.add_all_edges()
-
-#print(graph.edges())
+# { 
+#     Vertex ('A'): { 
+#         Vertex ('B'): Edge (Vertex ('B'), Vertex ('A')), 
+#         Vertex ('C'): Edge (Vertex ('C'), Vertex ('A'))
+#     }, 
+#     Vertex ('B'): {
+#         Vertex ('A'): Edge (Vertex ('B'), Vertex ('A')), 
+#         Vertex ('C'): Edge (Vertex ('C'), Vertex ('B'))
+#     }, 
+#     Vertex ('C'): {
+#         Vertex ('A'): Edge (Vertex ('C'), Vertex ('A')), 
+#         Vertex ('B'): Edge (Vertex ('C'), Vertex ('B'))
+#     }
+# }
 
 '''
 Michael Sjoeberg
-2019-09-08
+2019-09-10
 https://github.com/michaelsjoeberg/python-playground/blob/master/applications/graphs-with-python.py
 '''
