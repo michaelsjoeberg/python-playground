@@ -6,16 +6,16 @@ class Graph():
         self.V = vertices 
         self.graph = [[0 for column in range(vertices)] for row in range(vertices)] 
 
-    # utility function to print tree stored in parent[] 
+    # function to print tree stored in parent
     def print_mst(self, parent): 
         print("Edge \tWeight")
         for i in range(1, self.V): 
             print(parent[i], "-", i, "\t", self.graph[i][ parent[i]])
 
-    # utility function to find vertex with minimum distance value, from
-    # set of vertices not yet included in shortest path tree 
+    # function to find vertex with minimum distance value from set of 
+    # vertices not included in shortest path tree 
     def min_key(self, key, mst_set): 
-        # init min value 
+        # define min value 
         min = sys.maxsize 
 
         for v in range(self.V): 
@@ -41,11 +41,10 @@ class Graph():
         # first node is root
         parent[0] = -1
 
-        for cout in range(self.V): 
-            # select minimum distance vertex from set of vertices not yet 
-            # processed. 
-            
-            # u is equal to src in first iteration 
+        # select minimum distance vertex from set of vertices not 
+        # processed
+        for cout in range(self.V):     
+            # u is equal to source in first iteration 
             u = self.min_key(key, mst_set) 
 
             # add minimum distance vertex to shortest path tree 
@@ -55,9 +54,6 @@ class Graph():
             # if current distance is greater than new distance and vertex not 
             # in shotest path tree 
             for v in range(self.V): 
-                # graph[u][v] is non zero only for adjacent vertices of m 
-                # mst_set[v] is false for vertices not yet included in MST 
-                
                 # update key if graph[u][v] is smaller than key[v] 
                 if self.graph[u][v] > 0 and mst_set[v] == False and key[v] > self.graph[u][v]: 
                     key[v] = self.graph[u][v] 
@@ -67,16 +63,22 @@ class Graph():
 
 # create graph
 g = Graph(5) 
-g.graph = [ [0, 2, 0, 6, 0], 
-            [2, 0, 3, 8, 5], 
-            [0, 3, 0, 0, 7], 
-            [6, 8, 0, 0, 9], 
-            [0, 5, 7, 9, 0]] 
+g.graph = [[0, 2, 0, 6, 0], 
+           [2, 0, 3, 8, 5], 
+           [0, 3, 0, 0, 7], 
+           [6, 8, 0, 0, 9], 
+           [0, 5, 7, 9, 0]] 
 
-g.prim_mst(); 
+g.prim_mst()
+
+# Edge    Weight
+# 0 - 1    2
+# 1 - 2    3
+# 0 - 3    6
+# 1 - 4    5
 
 '''
 Michael Sjoeberg
-2020-04-09
+2020-04-10
 https://github.com/michaelsjoeberg/python-playground/blob/master/applications/prim-minimum-spanning-tree-algorithm.py
 '''
