@@ -1,5 +1,4 @@
 # https://en.wikipedia.org/wiki/Multilayer_perceptron
-
 import os
 import numpy as np
 import matplotlib.pyplot as plt

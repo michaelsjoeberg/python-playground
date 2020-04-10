@@ -1,5 +1,4 @@
 # https://en.wikipedia.org/wiki/Convolutional_neural_network
-
 import os
 import numpy as np
 import matplotlib.pyplot as plt
