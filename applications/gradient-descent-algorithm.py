@@ -6,7 +6,7 @@ import random
 # 2. calculate loss = h - y, squared cost = (loss ** 2) / (2 * m)
 # 3. calculate gradient = X' * loss / m
 # 4. update parameters thete = theta - alpha * gradient
-
+#
 # m: number of examples
 
 def gradient_descent(x, y, theta, alpha, m, num_iterations):
@@ -54,8 +54,17 @@ theta = gradient_descent(x, y, theta, alpha, m, num_iterations)
 #print
 print(theta)
 
+# Iteration: 0, Cost: 3440.881818
+# Iteration: 1, Cost: 3434.861831
+# .
+# .
+# .
+# Iteration: 9998, Cost: 429.382775
+# Iteration: 9999, Cost: 429.382775
+# [39.80223561 39.80223561]
+
 '''
 Michael Sjoeberg
-2020-04-09
+2020-04-10
 https://github.com/michaelsjoeberg/python-playground/blob/master/applications/gradient-descent-algorithm.py
 '''
