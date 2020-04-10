@@ -12,7 +12,8 @@ inf = float('inf')
 edge = namedtuple('Edge', 'start, end, cost')
 
 # make_edge
-def make_edge(start, end, cost=1): return edge(start, end, cost)
+def make_edge(start, end, cost=1):
+    return edge(start, end, cost)
 
 class Graph:
     def __init__(self, edges):
@@ -27,9 +28,7 @@ class Graph:
     def vertices(self):
         return set(
             # turn ([1,2], [3,4]) into [1, 2, 3, 4]
-            sum(
-                ([edge.start, edge.end] for edge in self.edges), []
-            )
+            sum(([edge.start, edge.end] for edge in self.edges), [])
         )
 
     # get_node_pairs
@@ -74,7 +73,7 @@ class Graph:
 
     # dijkstra
     def dijkstra(self, source, destination):
-        assert source in self.vertices, 'Assert: Source do not exist.'
+        assert source in self.vertices, 'assert: source do not exist'
 
         # 1. mark all nodes unvisited
         # 2. set initial node distance to zero, other nodes to infinite
@@ -127,9 +126,10 @@ graph = Graph([
 ])
 
 print(graph.dijkstra('a', 'f'))
+# deque(['a', 'c', 'f'])
 
 '''
 Michael Sjoeberg
-2020-04-09
+2020-04-10
 https://github.com/michaelsjoeberg/python-playground/blob/master/applications/dijkstra-shortest-path-algorithm.py
 '''
