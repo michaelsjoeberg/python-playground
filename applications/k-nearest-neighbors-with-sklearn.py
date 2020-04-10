@@ -3,6 +3,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
+# sklearn
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import classification_report, confusion_matrix
+
+# suppress url ssl error (not on our end)
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
 
 # assign column names
@@ -12,42 +21,46 @@ names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'Class']
 dataset = pd.read_csv(url, names=names)
 #dataset.head()
 
-# preprocessing
-x = dataset.iloc[:, :-1].values
-y = dataset.iloc[:, 4].values
+# preprocessing (selecting data)
+X = dataset.iloc[:, :-1].values
+Y = dataset.iloc[:, 4].values
 
-# train-test split
-from sklearn.model_selection import train_test_split
+# train-test split: 80% is training data, 20% is testing data
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.20)
 
-# 80% train data, 20% test data
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20)
-
-# feature scaling
-from sklearn.preprocessing import StandardScaler
-
+# apply feature scaling
 scaler = StandardScaler()
-scaler.fit(x_train)
+scaler.fit(X_train)
 
-x_train = scaler.transform(x_train)
-x_test = scaler.transform(x_test)
+X_train = scaler.transform(X_train)
+X_test = scaler.transform(X_test)
 
 # training and predictions
-from sklearn.neighbors import KNeighborsClassifier
-
 classifier = KNeighborsClassifier(n_neighbors=5)
-classifier.fit(x_train, y_train)
+classifier.fit(X_train, Y_train)
 
-y_prediction = classifier.predict(x_test)
+Y_prediction = classifier.predict(X_test)
 #y_prediction
 
 # evaluate
-from sklearn.metrics import classification_report, confusion_matrix
+print(confusion_matrix(Y_test, Y_prediction))
+print(classification_report(Y_test, Y_prediction))
 
-print(confusion_matrix(y_test, y_prediction))
-print(classification_report(y_test, y_prediction))
+# [[ 8  0  0]
+#  [ 0 11  1]
+#  [ 0  0 10]]
+#                  precision    recall  f1-score   support
+#
+#     Iris-setosa       1.00      1.00      1.00         8
+# Iris-versicolor       1.00      0.92      0.96        12
+#  Iris-virginica       0.91      1.00      0.95        10
+#
+#        accuracy                           0.97        30
+#       macro avg       0.97      0.97      0.97        30
+#    weighted avg       0.97      0.97      0.97        30
 
 '''
 Michael Sjoeberg
-2020-04-09
+2020-04-10
 https://github.com/michaelsjoeberg/python-playground/blob/master/applications/k-nearest-neighbors-with-sklearn.py
 '''
