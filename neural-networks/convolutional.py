@@ -62,12 +62,12 @@ model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='
 
 # train model
 model.fit(
-	X_train,
-	Y_train,
-	validation_data=(X_test, Y_test),
-	epochs=epochs,
-	batch_size=batch_size,
-	verbose=2
+    X_train,
+    Y_train,
+    validation_data=(X_test, Y_test),
+    epochs=epochs,
+    batch_size=batch_size,
+    verbose=2
 )
 
 # evaluate

@@ -25,12 +25,12 @@ epochs = 5
 
 # plt.figure()
 # for i in range(9):
-# 	plt.subplot(3, 3, i + 1)
-# 	plt.tight_layout()
-# 	plt.imshow(X_train[i], cmap='gray', interpolation='none')
-# 	plt.title("{}".format(Y_train[i]))
-# 	plt.xticks([])
-# 	plt.yticks([])
+#   plt.subplot(3, 3, i + 1)
+#   plt.tight_layout()
+#   plt.imshow(X_train[i], cmap='gray', interpolation='none')
+#   plt.title("{}".format(Y_train[i]))
+#   plt.xticks([])
+#   plt.yticks([])
 # plt.savefig('figure.png')
 
 #print(X_train.shape)
@@ -81,12 +81,12 @@ model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='
 
 # train model
 model.fit(
-	X_train,
-	Y_train,
-	validation_data=(X_test, Y_test),
-	epochs=epochs,
-	batch_size=batch_size,
-	verbose=2
+    X_train,
+    Y_train,
+    validation_data=(X_test, Y_test),
+    epochs=epochs,
+    batch_size=batch_size,
+    verbose=2
 )
 
 # evaluate
