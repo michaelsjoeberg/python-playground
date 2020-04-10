@@ -28,14 +28,14 @@ t = [1, 1, 1, 0, 0, 0]
 # Heaviside function (https://en.wikipedia.org/wiki/Heaviside_step_function)
 # -----------------------------------------------------------
 def transfer_function(w, x):
-	wx = np.dot(w, x)
+    wx = np.dot(w, x)
 
-	if (wx > 0):
-		return 1
-	elif (wx == 0):
-		return 0.5
-	else:
-		return 0
+    if (wx > 0):
+        return 1
+    elif (wx == 0):
+        return 0.5
+    else:
+        return 0
 
 assert (transfer_function([0.1, -0.5, 0.4], [0.1, -0.5, 0.4]) == 1)
 assert (transfer_function([0.1, -0.5, 0.4], [0.1, 0.5, 0.4]) == 0)
@@ -45,22 +45,22 @@ assert (transfer_function([0, 0, 0], [0, 0, 0]) == 0.5)
 # -----------------------------------------------------------
 result = []
 for o in range(int(iterations / len(X))):
-	for i in range(len(X)):
-		if ((i + 1 + (len(X) * o)) > iterations): break
+    for i in range(len(X)):
+        if ((i + 1 + (len(X) * o)) > iterations): break
 
-		w_prev = w
-		x = X[i]
-		y = transfer_function(w, x)
+        w_prev = w
+        x = X[i]
+        y = transfer_function(w, x)
 
-		# calculate update part
-		update = np.zeros(len(x))
-		for j in range(len(x)): update[j] = n * (t[i] - y) * x[j]
+        # calculate update part
+        update = np.zeros(len(x))
+        for j in range(len(x)): update[j] = n * (t[i] - y) * x[j]
 
-		# add update part to a
-		w = np.add(w, update)
+        # add update part to a
+        w = np.add(w, update)
 
-		# append result
-		result.append((str(i + 1 + (len(X) * o)), np.round(w_prev, 4), np.round(x, 4), np.round(y, 4), np.round(t[i], 4), np.round(w, 4)))
+        # append result
+        result.append((str(i + 1 + (len(X) * o)), np.round(w_prev, 4), np.round(x, 4), np.round(y, 4), np.round(t[i], 4), np.round(w, 4)))
 
 # prettytable
 # -----------------------------------------------------------

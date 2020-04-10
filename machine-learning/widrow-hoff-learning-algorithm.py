@@ -25,22 +25,22 @@ Y = [[1, 0, 2], [1, 1, 2], [1, 2, 1], [-1, 3, -1], [-1, 2, 1], [-1, 3, 2]]
 # -----------------------------------------------------------
 result = []
 for o in range(int(iterations / len(Y))):
-	for i in range(len(Y)):
-		a_prev = a
-		y = Y[i]
+    for i in range(len(Y)):
+        a_prev = a
+        y = Y[i]
 
-		# calculate ay
-		ay = np.dot(a, y)
+        # calculate ay
+        ay = np.dot(a, y)
 
-		# calculate update part
-		update = np.zeros(len(y))
-		for j in range(len(y)): update[j] = n * (b[i] - ay) * y[j]
+        # calculate update part
+        update = np.zeros(len(y))
+        for j in range(len(y)): update[j] = n * (b[i] - ay) * y[j]
 
-		# add update part to a
-		a = np.add(a, update)
+        # add update part to a
+        a = np.add(a, update)
 
-		# append result
-		result.append((str(i + 1 + (len(Y) * o)), np.round(a_prev, 4), np.round(y, 4), np.round(ay, 4), np.round(a, 4)))
+        # append result
+        result.append((str(i + 1 + (len(Y) * o)), np.round(a_prev, 4), np.round(y, 4), np.round(ay, 4), np.round(a, 4)))
 
 # prettytable
 # -----------------------------------------------------------
