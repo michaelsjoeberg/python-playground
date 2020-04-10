@@ -81,3 +81,9 @@ print(accuracy)
 
 # 0.029002553918152263
 # 0.9906
+
+'''
+Michael Sjoeberg
+2020-04-10
+https://github.com/michaelsjoeberg/python-playground/blob/master/neural-networks/convolutional.py
+'''

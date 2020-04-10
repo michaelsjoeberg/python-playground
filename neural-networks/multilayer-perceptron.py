@@ -100,3 +100,9 @@ print(accuracy)
 
 # 0.060108443084184546
 # 0.9802
+
+'''
+Michael Sjoeberg
+2020-04-10
+https://github.com/michaelsjoeberg/python-playground/blob/master/neural-networks/multilayer-perceptron.py
+'''
