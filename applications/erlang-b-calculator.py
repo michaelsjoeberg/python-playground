@@ -2,12 +2,12 @@
 from math import factorial
 
 def erlang(A, m):
-	L = (A ** m) / factorial(m)
+    L = (A ** m) / factorial(m)
 
-	sum_ = 0
-	for n in range(m + 1): sum_ += (A ** n) / factorial(n)
+    sum_ = 0
+    for n in range(m + 1): sum_ += (A ** n) / factorial(n)
 
-	return (L / sum_)
+    return (L / sum_)
 
 print(erlang(90, 107))
 
