@@ -1,25 +1,22 @@
 # calculator.py
 import sys
-
 print('Python Version: ' + sys.version)
 
 # Recursive descent parser: https://en.wikipedia.org/wiki/Recursive_descent_parser
-#
 # Based on https://ruslanspivak.com/lsbasi-part1/
 
-# token types
-#
-# EOF (end-of-file): no more input left for lexical analysis
+# ---------------------------------------------------
+# Lexer
+# ---------------------------------------------------
+
+# token types (note: EOF means no more input left for lexical analysis)
 INTEGER, PLUS, MINUS, MULTIPLY, DIVIDE, LPAR, RPAR, EOF = (
     'INTEGER', 'PLUS', 'MINUS', 'MULTIPLY', 'DIVIDE', 'LPAR', 'RPAR', 'EOF'
 )
 
 class Token(object):
     def __init__(self, type_, value):
-        # token types, e.g. INTEGER, PLUS, MINUS, or EOF
         self.type_ = type_
-
-        #token values, e.g. non-negative integers, '+', '-', or None
         self.value = value
 
     def __str__(self):
@@ -37,12 +34,8 @@ class Token(object):
     def __repr__(self):
         return self.__str__()
 
-# ---------------------------------------------------
-# Lexer
-# ---------------------------------------------------
 class Lexer(object):
     def __init__(self, text):
-        # string input
         self.text = text
 
         # index in text
@@ -85,9 +78,10 @@ class Lexer(object):
 
         return int(result)
 
+    # Lexical Analyzer (Tokenizer)
     def get_next_token(self):
         '''
-        Lexical analyzer (tokenizer): break input into tokens.
+        Break input into tokens.
         '''
 
         while (self.current_char is not None):
@@ -136,9 +130,31 @@ class Lexer(object):
         return Token(EOF, None)
 
 # ---------------------------------------------------
-# Interpreter
+# Parser
 # ---------------------------------------------------
-class Interpreter(object):
+class AST(object): pass
+
+class BinaryOperator(AST):
+    def __init__(self, left, operator, right):
+        '''
+        BinaryOperator('+'):
+            BinaryOperator('*'):
+                Number(2)
+                Number(7)
+            Number(3)
+        '''
+
+        self.left = left
+        self.token = operator
+        self.operator = operator
+        self.right = right
+
+class Number(AST):
+    def __init__(self, token):
+        self.token = token
+        self.value = token.value
+
+class Parser(object):
     def __init__(self, lexer):
         self.lexer = lexer
 
@@ -163,44 +179,39 @@ class Interpreter(object):
         '''
         token = self.current_token
 
-        # integer
+        # INTEGER
         if (token.type_ == INTEGER):
             self.eat(INTEGER)
-            return token.value
+            
+            return Number(token)
         
-        # lpar / rpar
+        # LPAR / LPAR
         elif (token.type_ == LPAR):
             self.eat(LPAR)
-            result = self.expr()
+            node = self.expr()
             self.eat(RPAR)
-            return result
+            return node
 
     def term(self):
         '''
         term : factor ((MULTIPLY | DIVIDE) factor)*
         '''
-        result = self.factor()
+        node = self.factor()
         
         while (self.current_token.type_ in (MULTIPLY, DIVIDE)):
             token = self.current_token
 
-            # multiply
+            # MULTIPLY
             if (token.type_ == MULTIPLY):
                 self.eat(MULTIPLY)
-                result = result * self.factor()
 
-            # divide
+            # DIVIDE
             elif (token.type_ == DIVIDE):
                 self.eat(DIVIDE)
-                result = result / self.factor()
-                
-                # factor = self.factor()
-                # if (factor > 0):
-                #     result = result / factor
-                # else:
-                #     raise Exception('Zero divison error.')
 
-        return result
+            node = BinaryOperator(left=node, operator=token, right=self.factor())
+
+        return node
 
     def expr(self):
         '''
@@ -210,22 +221,64 @@ class Interpreter(object):
         term   : factor ((MUL | DIV) factor)*
         factor : INTEGER | LPAR expr RPAR
         '''
-        result = self.term()
+        node = self.term()
         
         while (self.current_token.type_ in (PLUS, MINUS)):
             token = self.current_token
             
-            # plus
+            # PLUS
             if (token.type_ == PLUS):
                 self.eat(PLUS)
-                result = result + self.term()
             
-            # minus
+            # MINUS
             elif (token.type_ == MINUS):
                 self.eat(MINUS)
-                result = result - self.term()
 
-        return result
+            node = BinaryOperator(left=node, operator=token, right=self.term())
+
+        return node
+
+    def parse(self):
+        return self.expr()
+
+# ---------------------------------------------------
+# Interpreter
+# ---------------------------------------------------
+class NodeVisitor(object):
+    def visit(self, node):
+        method_name = 'visit_' + type(node).__name__
+        visitor = getattr(self, method_name, self.generic_visit)
+
+        return visitor(node)
+
+    def generic_visit(self, node):
+        raise Exception('No visit_{} method'.format(type(node).__name__))
+
+class Interpreter(NodeVisitor):
+    def __init__(self, parser):
+        self.parser = parser
+
+    def visit_BinaryOperator(self, node):
+        # PLUS
+        if (node.operator.type_ == PLUS):
+            return self.visit(node.left) + self.visit(node.right)
+        # MINUS
+        elif (node.operator.type_ == MINUS):
+            return self.visit(node.left) - self.visit(node.right)
+        # MULTIPLY
+        elif (node.operator.type_ == MULTIPLY):
+            return self.visit(node.left) * self.visit(node.right)
+        # DIVIDE
+        elif (node.operator.type_ == DIVIDE):
+            return self.visit(node.left) / self.visit(node.right)
+
+    def visit_Number(self, node):
+        return node.value
+
+    def interpret(self):
+        tree = self.parser.parse()
+
+        return self.visit(tree)
 
 def main():
     while True:
@@ -239,8 +292,9 @@ def main():
             continue
 
         lexer = Lexer(text)
-        interpreter = Interpreter(lexer)
-        result = interpreter.expr()
+        parser = Parser(lexer)
+        interpreter = Interpreter(parser)
+        result = interpreter.interpret()
         
         print(result)
 
