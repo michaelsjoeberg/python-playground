@@ -5,29 +5,38 @@ print('Python Version: ' + sys.version)
 
 # token types
 #
-# EOF (end-of-file): used to indicate no more input left for lexical analysis
-INTEGER, PLUS, MINUS, MULTIPLY, DIVIDE, EOF = 'INTEGER', 'PLUS', 'MINUS', 'MULTIPLY', 'DIVIDE', 'EOF'
+# EOF (end-of-file): no more input left for lexical analysis
+INTEGER, PLUS, MINUS, MULTIPLY, DIVIDE, EOF = (
+    'INTEGER', 'PLUS', 'MINUS', 'MULTIPLY', 'DIVIDE', 'EOF'
+)
 
 class Token(object):
     def __init__(self, type_, value):
-        # token types: INTEGER, PLUS, MINUS, or EOF
+        # token types, e.g. INTEGER, PLUS, MINUS, or EOF
         self.type_ = type_
 
-        #token values: non-negative integers, '+', '-', or None
+        #token values, e.g. non-negative integers, '+', '-', or None
         self.value = value
 
     def __str__(self):
         '''
         Token(INTEGER, 3)
         Token(PLUS, '+')
+        Token(MULTIPLY, '*')
         '''
 
-        return 'Token({type_}, {value})'.format(type_ = self.type_, value = repr(self.value))
+        return 'Token({type_}, {value})'.format(
+            type_ = self.type_,
+            value = repr(self.value)
+        )
 
     def __repr__(self):
         return self.__str__()
 
-class Interpreter(object):
+# ---------------------------------------------------
+# Lexer
+# ---------------------------------------------------
+class Lexer(object):
     def __init__(self, text):
         # string input
         self.text = text
@@ -35,24 +44,19 @@ class Interpreter(object):
         # index in text
         self.pos = 0
 
-        # current token
-        self.current_token = None
-
         # current character
         self.current_char = self.text[self.pos]
 
-    # ---------------------------------------------------
-    # Lexer
-    # ---------------------------------------------------
-    def error(self): raise Exception('Error parsing input.')
+    def error(self): raise Exception('Invalid character.')
 
     def increment(self):
         '''
         Increment index in text and set current character.
         '''
-
         self.pos += 1
+        
         if (self.pos > len(self.text) - 1):
+            # end of input
             self.current_char = None
         else:
             self.current_char = self.text[self.pos]
@@ -67,10 +71,10 @@ class Interpreter(object):
 
     def integer(self):
         '''
-        Return multi-digit integers.
+        Return a multi-digit integer.
         '''
-
         result = ''
+        
         while (self.current_char is not None and self.current_char.isdigit()):
             result += self.current_char
             self.increment()
@@ -117,42 +121,75 @@ class Interpreter(object):
 
         return Token(EOF, None)
 
-    # ---------------------------------------------------
-    # Parser (Interpreter)
-    # ---------------------------------------------------
+# ---------------------------------------------------
+# Interpreter
+# ---------------------------------------------------
+class Interpreter(object):
+    def __init__(self, lexer):
+        self.lexer = lexer
+
+        # set current token to first token from input
+        self.current_token = self.lexer.get_next_token()
+
+    def error(self): raise Exception('Invalid syntax.')
+
     def eat(self, token_type):
         '''
         Eat current token if match with passed token type.
         '''
 
         if (self.current_token.type_ == token_type):
-            self.current_token = self.get_next_token()
+            self.current_token = self.lexer.get_next_token()
         else:
             self.error()
 
-    def term(self):
+    def factor(self):
         '''
-        Return integer token value.
+        factor : INTEGER
         '''
-
         token = self.current_token
         self.eat(INTEGER)
 
         return token.value
 
-    def expression(self):
+    def term(self):
         '''
-        Arithmetic expression parser and interpreter.
+        term : factor ((MULTIPLY | DIVIDE) factor)*
+        '''
+        result = self.factor()
         
-        INTEGER PLUS INTEGER
-        INTEGER MINUS INTEGER PLUS INTEGER
+        while (self.current_token.type_ in (MULTIPLY, DIVIDE)):
+            token = self.current_token
+
+            # multiply
+            if (token.type_ == MULTIPLY):
+                self.eat(MULTIPLY)
+                result = result * self.factor()
+
+            # divide
+            elif (token.type_ == DIVIDE):
+                self.eat(DIVIDE)
+                result = result / self.factor()
+                
+                # factor = self.factor()
+                # if (factor > 0):
+                #     result = result / factor
+                # else:
+                #     raise Exception('Zero divison error.')
+
+        return result
+
+    def expr(self):
         '''
-
-        # set current token to first token from input
-        self.current_token = self.get_next_token()
-
+        Arithmetic expression parser.
+        
+        expr   : term ((PLUS | MINUS) term)*
+        term   : factor ((MUL | DIV) factor)*
+        factor : INTEGER
+        '''
         result = self.term()
-        while (self.current_token.type_ in (PLUS, MINUS, MULTIPLY, DIVIDE)):
+        
+        while (self.current_token.type_ in (PLUS, MINUS)):
             token = self.current_token
             
             # plus
@@ -164,21 +201,6 @@ class Interpreter(object):
             elif (token.type_ == MINUS):
                 self.eat(MINUS)
                 result = result - self.term()
-
-            # multiply
-            elif (token.type_ == MULTIPLY):
-                self.eat(MULTIPLY)
-                result = result * self.term()
-
-            # divide
-            elif (token.type_ == DIVIDE):
-                self.eat(DIVIDE)
-                term = self.term()
-
-                if (term > 0):
-                    result = result / term
-                else:
-                    raise Exception('Zero divison error.')
 
         return result
 
@@ -193,8 +215,9 @@ def main():
         if not text:
             continue
 
-        interpreter = Interpreter(text)
-        result = interpreter.expression()
+        lexer = Lexer(text)
+        interpreter = Interpreter(lexer)
+        result = interpreter.expr()
         
         print(result)
 
