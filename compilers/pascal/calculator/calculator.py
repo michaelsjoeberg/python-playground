@@ -8,7 +8,6 @@ print('Python Version: ' + sys.version)
 # ---------------------------------------------------
 # Lexer
 # ---------------------------------------------------
-
 # token types (note: EOF means no more input left for lexical analysis)
 INTEGER, PLUS, MINUS, MULTIPLY, DIVIDE, LPAR, RPAR, EOF = (
     'INTEGER', 'PLUS', 'MINUS', 'MULTIPLY', 'DIVIDE', 'LPAR', 'RPAR', 'EOF'
