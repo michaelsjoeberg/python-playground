@@ -3,6 +3,10 @@ import sys
 
 print('Python Version: ' + sys.version)
 
+# Recursive descent parser: https://en.wikipedia.org/wiki/Recursive_descent_parser
+#
+# Based on https://ruslanspivak.com/lsbasi-part1/
+
 # token types
 #
 # EOF (end-of-file): no more input left for lexical analysis
