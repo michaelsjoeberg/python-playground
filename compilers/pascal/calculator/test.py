@@ -1,4 +1,3 @@
-# https://ruslanspivak.com/lsbasi-part4/
 from calculator import Lexer
 from calculator import Interpreter
 
