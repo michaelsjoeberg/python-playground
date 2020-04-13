@@ -6,8 +6,8 @@ print('Python Version: ' + sys.version)
 # token types
 #
 # EOF (end-of-file): no more input left for lexical analysis
-INTEGER, PLUS, MINUS, MULTIPLY, DIVIDE, EOF = (
-    'INTEGER', 'PLUS', 'MINUS', 'MULTIPLY', 'DIVIDE', 'EOF'
+INTEGER, PLUS, MINUS, MULTIPLY, DIVIDE, LPAR, RPAR, EOF = (
+    'INTEGER', 'PLUS', 'MINUS', 'MULTIPLY', 'DIVIDE', 'LPAR', 'RPAR', 'EOF'
 )
 
 class Token(object):
@@ -117,6 +117,16 @@ class Lexer(object):
                 self.increment()
                 return Token(DIVIDE, '/')
 
+            # lpar
+            if (self.current_char == '('):
+                self.increment()
+                return Token(LPAR, '(')
+
+            # rpar
+            if (self.current_char == ')'):
+                self.increment()
+                return Token(RPAR, ')')
+
             self.error()
 
         return Token(EOF, None)
@@ -145,12 +155,21 @@ class Interpreter(object):
 
     def factor(self):
         '''
-        factor : INTEGER
+        factor : INTEGER | LPAR expr RPAR
         '''
         token = self.current_token
-        self.eat(INTEGER)
 
-        return token.value
+        # integer
+        if (token.type_ == INTEGER):
+            self.eat(INTEGER)
+            return token.value
+        
+        # lpar / rpar
+        elif (token.type_ == LPAR):
+            self.eat(LPAR)
+            result = self.expr()
+            self.eat(RPAR)
+            return result
 
     def term(self):
         '''
@@ -185,7 +204,7 @@ class Interpreter(object):
         
         expr   : term ((PLUS | MINUS) term)*
         term   : factor ((MUL | DIV) factor)*
-        factor : INTEGER
+        factor : INTEGER | LPAR expr RPAR
         '''
         result = self.term()
         
