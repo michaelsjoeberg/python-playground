@@ -104,5 +104,5 @@ print(accuracy)
 '''
 Michael Sjoeberg
 2020-04-10
-https://github.com/michaelsjoeberg/python-playground/blob/master/neural-networks/multilayer-perceptron.py
+https://github.com/michaelsjoeberg/python-playground/blob/master/neural-networks/multilayer-perceptron-layers-with-keras.py
 '''

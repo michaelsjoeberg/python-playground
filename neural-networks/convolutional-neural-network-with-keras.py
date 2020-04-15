@@ -85,5 +85,5 @@ print(accuracy)
 '''
 Michael Sjoeberg
 2020-04-10
-https://github.com/michaelsjoeberg/python-playground/blob/master/neural-networks/convolutional.py
+https://github.com/michaelsjoeberg/python-playground/blob/master/neural-networks/convolutional-neural-network-with-keras.py
 '''
