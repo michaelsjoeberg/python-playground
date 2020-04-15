@@ -2,6 +2,9 @@
 import random
 import math
 
+# ---------------------------------------------------------------------------
+#   Particle
+# ---------------------------------------------------------------------------
 class Particle:
     def __init__(self, x_0, dimensions):
         self.dimensions = dimensions        # number of decision parameters
@@ -50,6 +53,9 @@ class Particle:
                 # minimum position
                 if (self.position[i] < bounds[i][0]): self.position[i] = bounds[i][0]
 
+# ---------------------------------------------------------------------------
+#   Particle Swarm Optimisation
+# ---------------------------------------------------------------------------
 class PSO():
     def __init__(self, cost_function, x_0, bounds, num_particles, max_iterations):
         self.dimensions = len(x_0)
