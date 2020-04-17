@@ -165,8 +165,8 @@ class Lexer(object):
             result += self.current_char
             self.increment()
 
-        #token = RESERVED_KEYWORDS.get(result.upper(), Token(ID, result.lower()))
-        token = RESERVED_KEYWORDS.get(result, Token(ID, result))
+        token = RESERVED_KEYWORDS.get(result.upper(), Token(ID, result.lower()))
+        #token = RESERVED_KEYWORDS.get(result, Token(ID, result))
         return token
 
     # Lexical Analyzer (Tokenizer)
