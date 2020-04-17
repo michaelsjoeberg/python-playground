@@ -25,13 +25,8 @@ print('Python Version: ' + sys.version)
 '''
 
 # ---------------------------------------------------
-# Lexer
+# Lexer : Generate tokens
 # ---------------------------------------------------
-# token types (note: EOF means no more input left for lexical analysis)
-# INTEGER, PLUS, MINUS, MULTIPLY, LPAR, RPAR, BEGIN, END, ID, ASSIGN, SEMI, DOT, PROGRAM, VAR, COLON, COMMA, REAL, INTEGER_CONST, REAL_CONST, INTEGER_DIV, FLOAT_DIV, EOF = (
-#     'INTEGER', 'PLUS', 'MINUS', 'MULTIPLY', 'LPAR', 'RPAR', 'BEGIN', 'END', 'ID', 'ASSIGN', 'SEMI', 'DOT', 'PROGRAM', 'VAR', 'COLON', 'COMMA', 'REAL', 'INTEGER_CONST', 'REAL_CONST', 'INTEGER_DIV', 'FLOAT_DIV', 'EOF'
-# )
-
 INTEGER       = 'INTEGER'
 REAL          = 'REAL'
 INTEGER_CONST = 'INTEGER_CONST'
@@ -77,7 +72,6 @@ class Token(object):
     def __repr__(self):
         return self.__str__()
 
-#global RESERVED_KEYWORDS
 RESERVED_KEYWORDS = {
     'PROGRAM': Token('PROGRAM', 'PROGRAM'),
     'VAR': Token('VAR', 'VAR'),
@@ -257,7 +251,7 @@ class Lexer(object):
         return Token(EOF, None)
 
 # ---------------------------------------------------
-# Parser
+# Parser : Build AST (using tokens)
 # ---------------------------------------------------
 class AST(object): pass
 
@@ -600,7 +594,7 @@ class Parser(object):
         return node
 
 # ---------------------------------------------------
-# Interpreter
+# Interpreter : Execute instructions in AST
 # ---------------------------------------------------
 class NodeVisitor(object):
     def visit(self, node):
