@@ -1,13 +1,13 @@
-# spi.py
+# Recursive descent parser: https://en.wikipedia.org/wiki/Recursive_descent_parser
 import sys
 print('Python Version: ' + sys.version)
 
-# Recursive descent parser: https://en.wikipedia.org/wiki/Recursive_descent_parser
-#
-# Based on https://ruslanspivak.com/lsbasi-part1/
-# Interpreter in Rust: https://github.com/rspivak/lsbasi/blob/master/part7/rust/spi/src/main.rs
+# https://ruslanspivak.com/lsbasi-part1/
+# https://github.com/rspivak/lsbasi/blob/master/part7/rust/spi/src/main.rs
 
 '''
+    Context-free grammars (Backus-Naur Form)
+
     program                 : PROGRAM variable SEMI block DOT
     block                   : declarations compound_statement
     declarations            : VAR (variable_declaration SEMI)+ | empty
@@ -163,7 +163,7 @@ class Lexer(object):
         #token = RESERVED_KEYWORDS.get(result, Token(ID, result))
         return token
 
-    # Lexical Analyzer (Tokenizer)
+    # lexical analyzer (tokenizer)
     def get_next_token(self):
         '''
         Break input into tokens.
@@ -585,6 +585,7 @@ class Parser(object):
 
         return node
 
+    # syntax analyzer
     def parse(self):
         node = self.program()
 
