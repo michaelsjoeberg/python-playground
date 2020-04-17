@@ -1,5 +1,3 @@
-{ http://www.freepascal.org/ }
-{ compile and run: $ fpc testunary.pas && ./testunary }
 program testunary;
 
 begin
