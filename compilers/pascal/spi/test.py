@@ -1,24 +1,41 @@
+# https://www.onlinegdb.com/online_pascal_compiler
 from spi import Lexer
 from spi import Parser
 from spi import Interpreter
 
-#lexer = Lexer('5 + 5')
+# lexer
+# lexer = Lexer('BEGIN a := 2; END.')
 # print(lexer.get_next_token())
 # print(lexer.get_next_token())
 # print(lexer.get_next_token())
 # print(lexer.get_next_token())
+# print(lexer.get_next_token())
+# print(lexer.get_next_token())
+# print(lexer.get_next_token())
+# print(lexer.get_next_token())
+# Token(BEGIN, 'BEGIN')
+# Token(ID, 'a')
+# Token(ASSIGN, ':=')
+# Token(INTEGER, 2)
+# Token(SEMI, ';')
+# Token(END, 'END')
+# Token(DOT, '.')
+# Token(EOF, None)
 
-# ---------------------------------------------------
-# Asserts
-# ---------------------------------------------------
-#Interpreter(Parser(Lexer(text))).interpret()
+# parse file
+with open('test_full.pas', 'r') as file:
+	text = file.read()
 
-assert (Interpreter(Parser(Lexer('7 + 3 * (10 / (12 / (3 + 1) - 1))'))).interpret() == 22)
-assert (Interpreter(Parser(Lexer('7 + 3 * (10 / (12 / (3 + 1) - 1)) / (2 + 3) - 5 - 3 + (8)'))).interpret() == 10)
-assert (Interpreter(Parser(Lexer('7 + (((3 + 2)))'))).interpret() == 12)
+	lexer = Lexer(text)
+	parser = Parser(lexer)
+	interpreter = Interpreter(parser)
+	interpreter.interpret()
 
-# negation
-assert (Interpreter(Parser(Lexer('- 3'))).interpret() == -3)
-assert (Interpreter(Parser(Lexer('+ 3'))).interpret() == 3)
-assert (Interpreter(Parser(Lexer('5 - - - + - 3'))).interpret() == 8)
-assert (Interpreter(Parser(Lexer('5 - - - + - (3 + 4) - + 2'))).interpret() == 10)
+	for k, v in sorted(interpreter.GLOBAL_SCOPE.items()): print('{} = {}'.format(k, v))
+
+# a = 2
+# b = 25
+# c = 27
+# number = 2
+# x = 11
+# y = 5.997142857142857
