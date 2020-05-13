@@ -22,6 +22,8 @@ class Particle:
     def evaluate(self, cost_function):
         self.error = cost_function(self.position)
 
+        #print(self.error)
+
         # update individual best if current position is best
         if (self.error < self.error_best or self.error_best == -1):
             self.position_best = self.position
@@ -42,6 +44,8 @@ class Particle:
 
             self.velocity[i] = weight * self.velocity[i] + velocity_cognative + velocity_social
 
+        #print(self.velocity)
+
     # update particle position (based on velocity)
     def update_position(self, bounds=None):
         for i in range(0, self.dimensions):
@@ -52,6 +56,8 @@ class Particle:
                 if (self.position[i] > bounds[i][1]): self.position[i] = bounds[i][1]
                 # minimum position
                 if (self.position[i] < bounds[i][0]): self.position[i] = bounds[i][0]
+
+        #print(self.position)
 
 # ---------------------------------------------------------------------------
 #   Particle Swarm Optimisation
