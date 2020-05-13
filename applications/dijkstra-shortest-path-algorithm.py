@@ -94,7 +94,7 @@ class Graph:
             for neighbor, cost in self.neighbors[current_vertex]:
                 alternative_route = distances[current_vertex] + cost
 
-                if alternative_route < distances[neighbor]:
+                if (alternative_route < distances[neighbor]):
                     distances[neighbor] = alternative_route
                     previous_vertices[neighbor] = current_vertex
 
@@ -113,19 +113,29 @@ class Graph:
         return path
 
 # create example graph
+# graph = Graph([
+#     ('a', 'b', 7),
+#     ('a', 'c', 9),
+#     ('a', 'f', 14),
+#     ('b', 'c', 10),
+#     ('b', 'd', 15),
+#     ('c', 'd', 11),
+#     ('c', 'f', 2),
+#     ('d', 'e', 6),
+#     ('e', 'f', 9)
+# ])
+
 graph = Graph([
-    ('a', 'b', 7),
-    ('a', 'c', 9),
-    ('a', 'f', 14),
-    ('b', 'c', 10),
-    ('b', 'd', 15),
-    ('c', 'd', 11),
-    ('c', 'f', 2),
-    ('d', 'e', 6),
-    ('e', 'f', 9)
+    ('s', 'a', -1),
+    ('s', 'b', -4),
+    ('a', 'b', -2),
+    ('a', 'c', -2),
+    ('b', 'c', -2),
+    ('a', 'g', -12),
+    ('c', 'g', -3)
 ])
 
-print(graph.dijkstra('a', 'f'))
+print(graph.dijkstra('s', 'g'))
 # deque(['a', 'c', 'f'])
 
 '''
