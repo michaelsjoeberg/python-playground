@@ -9,17 +9,29 @@ iris = datasets.load_iris()
 
 # sample test data
 # -----------------------------------------
-S_test = np.array([
-    [1, 9, 0, 4, 5, 3, 2],
-    [9, 0, 4, 5, 3, 2, 1],
-    [0, 4, 5, 3, 2, 1, 9],
-    [4, 5, 3, 2, 1, 9, 0]]
-)
-S_test = S_test / np.array([2.3, 4, 1.5, 4]).reshape(-1, 1)
+# S_test = np.array([
+#     [1, 9, 0, 4, 5, 3, 2],
+#     [9, 0, 4, 5, 3, 2, 1],
+#     [0, 4, 5, 3, 2, 1, 9],
+#     [4, 5, 3, 2, 1, 9, 0]]
+# )
+# S_test = S_test / np.array([2.3, 4, 1.5, 4]).reshape(-1, 1)
 
-# S_test
-S_test = S_test + np.array([4, 2, 1, 0]).reshape(-1, 1)
-S_test = S_test.transpose()
+# # S_test
+# S_test = S_test + np.array([4, 2, 1, 0]).reshape(-1, 1)
+# S_test = S_test.transpose()
+
+iris.data = np.array([
+	[5, 1],
+	[5, -1],
+	[3, 0],
+	[2, 1],
+	[4, 2]
+])
+
+iris.target = np.array([1, 1, 2, 2, 2])
+
+S_test = np.array([[4, 0]])
 
 # sklearn
 # -----------------------------------------
