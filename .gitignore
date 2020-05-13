@@ -4,3 +4,4 @@ jupyter-notebooks/keras/.ipynb_checkpoints/*.ipynb
 *.pyc
 HIDDEN_*
 DRAFT_*
+data-science/mongodb/*
