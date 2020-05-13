@@ -5,3 +5,4 @@ jupyter-notebooks/keras/.ipynb_checkpoints/*.ipynb
 HIDDEN_*
 DRAFT_*
 data-science/mongodb/data/*
+data-science/spark/fs_sample/*
